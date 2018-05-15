@@ -20,16 +20,22 @@ class Game
     def play
         loop do
             puts
-            break if check_tie
-            puts "Turn: " + @turn.to_s + ", " + @current_player.name + " plays!"
             puts "Current board status:"
             @board.print_board
+            break if check_tie
+            puts "Turn: " + @turn.to_s + ", " + @current_player.name + " plays!"
             @current_player.select_box
+            if @board.has_winner?
+                @board.print_board
+                puts "We have a winner! Congratulations " + @current_player.name
+                break
+            end
             switch_players
             @turn+=1
             puts
             puts "Turn is over, switching players..."
         end
+        #TODO Add code to start again
     end
 
     def switch_players
