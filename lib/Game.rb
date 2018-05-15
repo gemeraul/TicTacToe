@@ -22,9 +22,9 @@ class Game
             puts "Current board status:"
             @board.print_board
             @current_player.select_box
-            @board.print_board
             #TODO: Add break when game is over
             switch_players
+            puts
             puts "Turn is over, switching players..."
         end
     end
