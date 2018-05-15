@@ -3,7 +3,8 @@ require "Game"
 
 module App
   puts
+  puts "Welcome! This is our Tic Tac Toe Simulator!"
+  puts
   game = Game.new('Tic Tac Toe')
-  puts "Welcome! This is a game called " + game.title
   game.play
 end
