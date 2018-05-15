@@ -8,8 +8,8 @@ class Board
     def add_mark(row,column, mark)
         if location_is_valid?(row,column)
             @board[row-1][column-1] = mark
-            @row = row
-            @column = column
+            @row = row-1
+            @column = column-1
             @mark = mark
             true
         else
@@ -18,7 +18,7 @@ class Board
     end
 
 	def get_value(row, column)
-		@board[row-1][column-1]
+		@board[row][column]
 	end
 
     def print_board
@@ -35,7 +35,7 @@ class Board
 
     def location_is_valid?(row, column)
         if !out_of_bounds(row, column)
-            space_is_free(row, column)
+            space_is_free(row-1, column-1)
         end
     end
 
@@ -62,12 +62,12 @@ class Board
     end
 
     def has_winner?
-        check_horizontal || check_vertical
+        check_horizontal || check_vertical || check_diagonal || check_diagonal_inverted
     end
 
     def check_vertical
         @size.times do |row|
-            if get_value(row+1, @column) != @mark
+            if get_value(row, @column) != @mark
                 break
             end
             if row == @size
@@ -78,7 +78,7 @@ class Board
 
     def check_horizontal
         @size.times do |column|
-            if get_value(@row, column+1) != @mark
+            if get_value(@row, column) != @mark
                 break
             end
             if column == @size
@@ -87,8 +87,30 @@ class Board
         end
     end
 
-    def check_diagonal(row, column, mark)
-        false
+    def check_diagonal
+        if @row == @column
+            @size.times do |index|
+                if get_value(index, index) != @mark
+                    break
+                end
+                if index == @size
+                    true
+                end
+            end
+        end
+    end
+
+    def check_diagonal_inverted
+        if (@row)+(@column) == @size-1
+            @size.times do |index|
+                if get_value(index, @size-1-index) != @mark
+                    break
+                end
+                if index == @size
+                    true
+                end
+            end
+        end
     end
 
 end
