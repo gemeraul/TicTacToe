@@ -49,9 +49,13 @@ class Board
         if get_value(row, column).nil?
             true
         else
+            puts "This space has already been marked! Try again..."
             false
         end
     end
 
+    def has_winner
+        false
+    end
 
 end
