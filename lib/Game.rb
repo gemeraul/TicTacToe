@@ -1,5 +1,6 @@
 require "Board"
 require "Player"
+require "Computer"
 
 class Game
 
@@ -7,15 +8,34 @@ class Game
 
     def initialize(title)
         @title = title
-        set_up_board_size
+        startup_game
+               
+    end
+
+    def startup_game
+        set_up_board
         create_name
         select_mark
-        @board = Board.new(@size)
-        @human_player = Player.new(@name, @mark, @board)
-        @computer_player = Player.new("R2-D2",@computer_mark, @board)
-        #TODO: Randomize starting player
-        @current_player = @human_player
+        create_players
+        set_turn_order
+    end
+    
+    def create_players
+        @player_1 = Player.new(@name, @mark, @board)
+        @player_2 = Computer.new("R2-D2",@computer_mark, @board)
+    end
+
+    def set_turn_order
+        option = flip_coin
+        @current_player = option == 0 ? @player_1 : @player_2
         @turn = 0
+    end
+
+    def flip_coin
+        puts "Lets flip a coin to see who goes first..."
+        random = rand(2)
+        puts random
+        random
     end
 
     def play
@@ -37,10 +57,10 @@ class Game
     end
 
     def switch_players
-        if @current_player == @human_player
-            @current_player = @computer_player
+        if @current_player == @player_1
+            @current_player = @player_2
         else
-            @current_player = @human_player
+            @current_player = @player_1
         end
         @turn+=1
         puts "\nTurn is over, switching players..."
@@ -55,9 +75,10 @@ class Game
         end
     end
 
-    def set_up_board_size
+    def set_up_board
         puts "Type in the desired board size"
         @size = gets.strip.to_i
+        @board = Board.new(@size) 
         #TODO: Add input validation
     end
 
