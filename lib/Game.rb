@@ -9,12 +9,13 @@ class Game
         @title = title
         @board = Board.new(3);
         @human_player = Player.new("Raul", "X", @board)
-        @computer_player = Player.new("R2D2","O", @board)
+        @computer_player = Player.new("R2-D2","O", @board)
         @current_player = @human_player
         @turn = 0
     end
 
     def play
+        #TODO: Add logic to ask for name and for which mark you want to use
         loop do
             puts
             puts "Turn: " + @turn.to_s + ", " + @current_player.name + " plays!"
