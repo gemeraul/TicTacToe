@@ -19,11 +19,13 @@ class Game
         loop do
             puts
             puts "Turn: " + @turn.to_s + ", " + @current_player.name + " plays!"
+            puts "Current board status:"
             @board.print_board
             @current_player.select_box
             @board.print_board
             #TODO: Add break when game is over
             switch_players
+            puts "Turn is over, switching players..."
         end
     end
 

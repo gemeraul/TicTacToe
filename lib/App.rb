@@ -2,8 +2,8 @@ require "TicTacToe/version"
 require "Game"
 
 module App
-  puts "Hello friend!"
+  puts
   game = Game.new('Tic Tac Toe')
-  puts "This is a game called " + game.title
+  puts "Welcome! This is a game called " + game.title
   game.play
 end
