@@ -1,5 +1,5 @@
 require "TicTacToe/version"
 
 module TicTacToe
-  # Your code goes here...
+  puts "Hello"
 end
