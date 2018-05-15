@@ -8,8 +8,7 @@ class Game
 
     def initialize(title)
         @title = title
-        startup_game
-               
+        startup_game             
     end
 
     def startup_game
@@ -53,7 +52,16 @@ class Game
             switch_players
             
         end
+        #play_again?
         #TODO Add code to start again
+    end
+
+    def play_again?
+        puts "Would you like to start again? (y/n)"
+        answer = gets.strip
+        if answer == "y"
+            #restart_game
+        end
     end
 
     def switch_players
