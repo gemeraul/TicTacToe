@@ -7,9 +7,9 @@ class Board
 
     def add_mark(row,column, mark)
         if location_is_valid?(row,column)
-            @board[row-1][column-1] = mark
-            @row = row-1
-            @column = column-1
+            @board[row][column] = mark
+            @row = row
+            @column = column
             @mark = mark
             true
         else
@@ -35,7 +35,7 @@ class Board
 
     def location_is_valid?(row, column)
         if !out_of_bounds(row, column)
-            space_is_free(row-1, column-1)
+            space_is_free(row, column)
         end
     end
 

@@ -14,7 +14,7 @@ class Player
             puts "Enter your coordinates in the form: 'row' , 'column'. Eg: 1,1 for 1st box"
             @row, @column = gets.strip.split(",").map(&:to_i)
             if input_valid?
-                if @board.add_mark(@row, @column, @mark)
+                if @board.add_mark(@row-1, @column-1, @mark)
                     break
                 end
             end
