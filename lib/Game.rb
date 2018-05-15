@@ -19,8 +19,7 @@ class Game
 
     def play
         loop do
-            puts
-            puts "Current board status:"
+            puts "\nCurrent board status:"
             @board.print_board
             break if check_tie
             puts "Turn: " + @turn.to_s + ", " + @current_player.name + " plays!"
@@ -31,9 +30,7 @@ class Game
                 break
             end
             switch_players
-            @turn+=1
-            puts
-            puts "Turn is over, switching players..."
+            
         end
         #TODO Add code to start again
     end
@@ -44,6 +41,8 @@ class Game
         else
             @current_player = @human_player
         end
+        @turn+=1
+        puts "\nTurn is over, switching players..."
     end
 
     def check_tie

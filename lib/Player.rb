@@ -25,9 +25,7 @@ class Player
         if @row.is_a?(Integer) && @column.is_a?(Integer)
             true
         else
-            puts
-            puts "This is an invalid input! Only use numbers separated by a comma >:("
-            puts
+            puts "\nThis is an invalid input! Only use numbers separated by a comma >:(\n"
             false
         end
     end

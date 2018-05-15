@@ -43,9 +43,7 @@ class Board
         if row <= @size && column <= @size
             false
         else
-            puts
-            puts "The values selected are out of bounds! Try again..."
-            puts
+            puts "\nThe values selected are out of bounds! Lets try again...\n"
             true
         end
     end
@@ -54,9 +52,7 @@ class Board
         if get_value(row, column).nil?
             true
         else
-            puts
-            puts "This space has already been marked! Try again..."
-            puts
+            puts "\nThis space has already been marked! Lets try again...\n"
             false
         end
     end
