@@ -57,17 +57,20 @@ class Game
     def set_up_board_size
         puts "Type in the desired board size"
         @size = gets.strip.to_i
+        #TODO: Add input validation
     end
 
     def create_name
         puts "Enter your name!"
         @name = gets.strip
+        #TODO: Add input validation
     end
 
     def select_mark
         puts "Select your mark! (type X or O)"
         @mark = gets.strip
         @computer_mark = @mark == "X" ? "O" : "X"
+        #TODO: Add input validation
     end
 
 
