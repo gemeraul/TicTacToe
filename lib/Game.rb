@@ -13,6 +13,7 @@ class Game
         @board = Board.new(@size)
         @human_player = Player.new(@name, @mark, @board)
         @computer_player = Player.new("R2-D2",@computer_mark, @board)
+        #TODO: Randomize starting player
         @current_player = @human_player
         @turn = 0
     end
