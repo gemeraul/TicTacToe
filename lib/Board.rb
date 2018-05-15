@@ -8,6 +8,9 @@ class Board
     def add_mark(row,column, mark)
         if location_is_valid?(row,column)
             @board[row-1][column-1] = mark
+            @row = row
+            @column = column
+            @mark = mark
             true
         else
             false
@@ -40,7 +43,9 @@ class Board
         if row <= @size && column <= @size
             false
         else
+            puts
             puts "The values selected are out of bounds! Try again..."
+            puts
             true
         end
     end
@@ -49,12 +54,40 @@ class Board
         if get_value(row, column).nil?
             true
         else
+            puts
             puts "This space has already been marked! Try again..."
+            puts
             false
         end
     end
 
-    def has_winner
+    def has_winner?
+        check_horizontal || check_vertical
+    end
+
+    def check_vertical
+        @size.times do |row|
+            if get_value(row+1, @column) != @mark
+                break
+            end
+            if row == @size
+                true
+            end
+        end
+    end
+
+    def check_horizontal
+        @size.times do |column|
+            if get_value(@row, column+1) != @mark
+                break
+            end
+            if column == @size
+                true
+            end
+        end
+    end
+
+    def check_diagonal(row, column, mark)
         false
     end
 
