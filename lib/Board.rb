@@ -17,6 +17,21 @@ class Board
         end
     end
 
+    def add_random_mark(mark)
+        @stop = false
+        @size.times do |r|
+            @size.times do |c|
+                if get_value(r,c) == nil
+                    @mark = mark
+                    add_mark(r, c, @mark)
+                    @stop = true
+                    break
+                end
+            end
+            break if @stop
+        end
+    end
+
 	def get_value(row, column)
 		@board[row][column]
 	end
