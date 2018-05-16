@@ -52,7 +52,7 @@ class Game
             switch_players
             
         end
-        #play_again?
+        play_again?
         #TODO Add code to start again
     end
 
@@ -60,8 +60,15 @@ class Game
         puts "Would you like to start again? (y/n)"
         answer = gets.strip
         if answer == "y"
-            #restart_game
+            restart_game
+        else
+            exit(true)
         end
+    end
+
+    def restart_game
+        startup_game
+        play
     end
 
     def switch_players
