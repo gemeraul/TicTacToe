@@ -81,8 +81,8 @@ class Board
             if get_value(row, @column) != @mark
                 break
             end
-            if row == @size
-                true
+            if row == @size-1
+                return true
             end
         end
     end
@@ -92,8 +92,8 @@ class Board
             if get_value(@row, column) != @mark
                 break
             end
-            if column == @size
-                true
+            if column == @size-1
+                return true
             end
         end
     end
@@ -104,8 +104,8 @@ class Board
                 if get_value(index, index) != @mark
                     break
                 end
-                if index == @size
-                    true
+                if index == @size-1
+                    return true
                 end
             end
         end
@@ -117,8 +117,8 @@ class Board
                 if get_value(index, @size-1-index) != @mark
                     break
                 end
-                if index == @size
-                    true
+                if index == @size-1
+                    return true
                 end
             end
         end
