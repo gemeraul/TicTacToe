@@ -4,24 +4,18 @@ require "Computer"
 
 class Game
 
-    attr_accessor :title
+    attr_accessor :title, :current_player, :turn
 
     def initialize(title)
         @title = title
-        startup_game             
+                     
     end
 
     def startup_game
-        set_up_board
-        create_name
+        @board, @size = create_board
         select_mark
-        create_players
+        @player_1, @player_2 = set_up_players
         set_turn_order
-    end
-    
-    def create_players
-        @player_1 = Player.new(@name, @mark, @board)
-        @player_2 = Computer.new("R2-D2",@computer_mark, @board)
     end
 
     def set_turn_order
@@ -33,11 +27,11 @@ class Game
     def flip_coin
         puts "Lets flip a coin to see who goes first..."
         random = rand(2)
-        puts random
         random
     end
 
     def play
+        startup_game
         loop do
             puts "\nCurrent board status:"
             @board.print_board
@@ -60,15 +54,10 @@ class Game
         puts "Would you like to start again? (y/n)"
         answer = gets.strip
         if answer == "y"
-            restart_game
+            play
         else
             exit(true)
         end
-    end
-
-    def restart_game
-        startup_game
-        play
     end
 
     def switch_players
@@ -90,16 +79,17 @@ class Game
         end
     end
 
-    def set_up_board
+    def create_board
         puts "Type in the desired board size"
-        @size = gets.strip.to_i
-        @board = Board.new(@size) 
+        size = gets.strip.to_i
+        [Board.new(size), size]
         #TODO: Add input validation
     end
 
-    def create_name
+    def set_up_players
         puts "Enter your name!"
         @name = gets.strip
+        [Player.new(@name, @mark, @board), Computer.new("R2-D2",@computer_mark, @board)]
         #TODO: Add input validation
     end
 
