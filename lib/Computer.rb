@@ -1,3 +1,4 @@
+# This is an AI that is not so smart when playing
 class Computer < Player
   attr_accessor :name, :mark
 
