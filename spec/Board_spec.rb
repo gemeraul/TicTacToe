@@ -5,12 +5,12 @@ RSpec.describe Board, 'add mark' do
     @board = Board.new 3
   end
   context 'player is adding a mark' do
-    it 'returns true when parameters given are valid and board array is updated' do
+    it 'returns true when parameters are valid and board is updated' do
       allow(@board).to receive(:location_is_valid?).and_return(true)
       expect(@board.add_mark(1, 1, 'O')).to be true
       expect(@board.get_value(1, 1)).to eq 'O'
     end
-    it 'returns false when parameters given are valid and board array is not updated' do
+    it 'returns false when parameters are valid and board is not updated' do
       allow(@board).to receive(:location_is_valid?).and_return(false)
       expect(@board.add_mark(1, 1, 'O')).to be false
       expect(@board.get_value(1, 1)).to be_falsey
@@ -28,7 +28,7 @@ RSpec.describe Board, 'add random mark' do
       expect(@board).to receive(:add_mark).once
       @board.add_random_mark('X')
     end
-    it 'calls add mark 1 time and get_value 2 times on a board with first row left box full' do
+    it 'calls add mark 1 time and get_value 2 times when values exist' do
       allow(@board).to receive(:get_value).and_return('O', nil)
       expect(@board).to receive(:add_mark).once
       expect(@board).to receive(:get_value).twice
@@ -140,13 +140,13 @@ RSpec.describe Board, 'check line values' do
       expect(@board.values_are_equal?(true)).to be_truthy
     end
     it 'returns nil when at least 1 value is different' do
-      allow(@board).to receive(:get_value).and_return('X','O','X')
+      allow(@board).to receive(:get_value).and_return('X', 'O', 'X')
       expect(@board.values_are_equal?(false, true)).to be_falsey
     end
   end
 end
 
-RSpec.describe Board, 'win conditions' do
+RSpec.describe Board, 'Horizontal win conditions' do
   before :each do
     @board = Board.new 3
   end
@@ -172,6 +172,12 @@ RSpec.describe Board, 'win conditions' do
       expect(@board.check_horizontal).to be nil
     end
   end
+end
+
+RSpec.describe Board, 'Vertical win conditions' do
+  before :each do
+    @board = Board.new 3
+  end
   # Context for Vertical winning condition
   context 'checking if board has vertical winning combination' do
     it "returns true when top column are all 'X's" do
@@ -194,6 +200,12 @@ RSpec.describe Board, 'win conditions' do
       expect(@board.check_vertical).to be nil
     end
   end
+end
+
+RSpec.describe Board, 'Diagonal win conditions' do
+  before :each do
+    @board = Board.new 3
+  end
   # Context for Diagonal winning condition
   context 'checking if board has diagonal winning combination' do
     it "returns true when diagonal are all 'X's" do
@@ -215,6 +227,12 @@ RSpec.describe Board, 'win conditions' do
       end
       expect(@board.check_diagonal).to be nil
     end
+  end
+end
+
+RSpec.describe Board, 'Inverted Diagonal win conditions' do
+  before :each do
+    @board = Board.new 3
   end
   # Context for Inverted Diagonal winning condition
   context 'checking if board has inverted diagonal winning combination' do
