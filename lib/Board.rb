@@ -71,36 +71,35 @@ class Board
     check_horizontal || check_vertical || check_diagonal || check_diagonal_inverted
   end
 
-  def values_are_equal?(isRow)
+  def values_are_equal?(isRow = false, isColumn = false, isDiag = false)
     @size.times do |index|
-      break if get_value(isRow ? index : @row, isRow ? @column : index) != @mark
+      break if get_value(
+        isColumn ? @row : index,
+        isRow ? @column
+        : isDiag ? index
+        : @size - 1 - index
+        ) != @mark
       return true if index == @size - 1
     end
   end
 
   def check_vertical
-    values_are_equal?(true)
+    values_are_equal?(true, false)
   end
 
   def check_horizontal
-    values_are_equal?(false)
+    values_are_equal?(false, true)
   end
 
   def check_diagonal
     if @row == @column
-      @size.times do |index|
-        break if get_value(index, index) != @mark
-        return true if index == @size - 1
-      end
+      values_are_equal?(false, false, true)
     end
   end
 
   def check_diagonal_inverted
     if @row + @column == @size - 1
-      @size.times do |index|
-        break if get_value(index, @size - 1 - index) != @mark
-        return true if index == @size - 1
-      end
+      values_are_equal?
     end
   end
 end

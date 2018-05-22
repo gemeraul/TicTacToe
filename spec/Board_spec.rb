@@ -141,7 +141,7 @@ RSpec.describe Board, 'check line values' do
     end
     it 'returns nil when at least 1 value is different' do
       allow(@board).to receive(:get_value).and_return('X','O','X')
-      expect(@board.values_are_equal?(false)).to be_falsey
+      expect(@board.values_are_equal?(false, true)).to be_falsey
     end
   end
 end
