@@ -130,6 +130,22 @@ RSpec.describe Board, 'space is free' do
   end
 end
 
+RSpec.describe Board, 'check line values' do
+  before :each do
+    @board = Board.new 3
+  end
+  context 'validating if line of @size has matching values ' do
+    it 'returns true when all values are equal' do
+      allow(@board).to receive(:get_value).and_return(nil, nil, nil)
+      expect(@board.values_are_equal?(true)).to be_truthy
+    end
+    it 'returns nil when at least 1 value is different' do
+      allow(@board).to receive(:get_value).and_return('X','O','X')
+      expect(@board.values_are_equal?(false)).to be_falsey
+    end
+  end
+end
+
 RSpec.describe Board, 'win conditions' do
   before :each do
     @board = Board.new 3
