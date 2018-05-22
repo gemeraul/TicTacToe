@@ -1,3 +1,4 @@
+# This is a matrix that will have the marks
 class Board
   def initialize(size)
     @size = size
@@ -21,8 +22,7 @@ class Board
     @size.times do |r|
       @size.times do |c|
         next unless get_value(r, c).nil?
-        @mark = mark
-        add_mark(r, c, @mark)
+        add_mark(r, c, mark)
         @stop = true
         break
       end
@@ -68,17 +68,15 @@ class Board
   end
 
   def winner?
-    check_horizontal || check_vertical || check_diagonal || check_diagonal_inverted
+    check_horizontal || check_vertical ||
+      check_diagonal || check_diagonal_inverted
   end
 
-  def values_are_equal?(isRow = false, isColumn = false, isDiag = false)
+  def values_are_equal?(is_row = false, is_column = false, is_diag = false)
     @size.times do |index|
       break if get_value(
-        isColumn ? @row : index,
-        isRow ? @column
-        : isDiag ? index
-        : @size - 1 - index
-        ) != @mark
+        is_column ? @row : index, is_row ? @column : is_diag ? index : @size - 1 - index
+      ) != @mark
       return true if index == @size - 1
     end
   end
@@ -92,14 +90,10 @@ class Board
   end
 
   def check_diagonal
-    if @row == @column
-      values_are_equal?(false, false, true)
-    end
+    return values_are_equal?(false, false, true) if @row == @column
   end
 
   def check_diagonal_inverted
-    if @row + @column == @size - 1
-      values_are_equal?
-    end
+    return values_are_equal? if @row + @column == @size - 1
   end
 end
