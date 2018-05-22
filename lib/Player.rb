@@ -1,3 +1,4 @@
+# This is a person who whill the game
 class Player
   attr_accessor :name, :mark
 
@@ -19,13 +20,14 @@ class Player
     if row.is_a?(Integer) && column.is_a?(Integer)
       true
     else
-      puts "\nThis is an invalid input! Only use numbers separated by a comma >:(\n"
+      puts "\nThis is an invalid input! Only use numbers separated by a comma\n"
       false
     end
   end
 
   def ask_for_coordinates
-    puts "#{@name}, its your turn! On which box would you like to add a #{@mark}?\nEnter your coordinates in the form: 'row' , 'column'. Eg: 1,1 for 1st box"
+    puts "#{@name}'s turn! On which box would you like to add a #{@mark}?
+    \nEnter your coordinates in the form: 'row' , 'column'. Eg: 1,1 for 1st box"
     coordinates = gets.strip.split(',').map(&:to_i)
     coordinates
   end
