@@ -2,6 +2,7 @@ require 'Board'
 require 'Player'
 require 'Computer'
 
+# This is a really cool game of TicTacToe
 class Game
   attr_accessor :title, :current_player, :turn
 
@@ -12,13 +13,13 @@ class Game
   def startup_game
     @board, @size = create_board
     select_mark
-    @player_1, @player_2 = set_up_players
+    @player1, @player2 = set_up_players
     set_turn_order
   end
 
   def set_turn_order
     option = flip_coin
-    @current_player = option.zero? ? @player_1 : @player_2
+    @current_player = option.zero? ? @player1 : @player2
     @turn = 0
   end
 
@@ -31,20 +32,13 @@ class Game
   def play
     startup_game
     loop do
-      puts "\nCurrent board status:"
       @board.print_board
-      break if check_tie
       puts 'Turn: ' + @turn.to_s + ', ' + @current_player.name + ' plays!'
       @current_player.select_box
-      if @board.winner?
-        @board.print_board
-        puts 'We have a winner! Congratulations ' + @current_player.name
-        break
-      end
+      break if check_game_over
       switch_players
     end
     play_again?
-    # TODO: Add code to start again
   end
 
   def play_again?
@@ -58,18 +52,32 @@ class Game
   end
 
   def switch_players
-    @current_player = if @current_player == @player_1
-                        @player_2
+    @current_player = if @current_player == @player1
+                        @player2
                       else
-                        @player_1
+                        @player1
                       end
     @turn += 1
     puts "\nTurn is over, switching players..."
   end
 
+  def check_game_over
+    check_win || check_tie
+  end
+
   def check_tie
     if @turn >= @size**2
       puts 'Aww game is over, we have a draw!'
+      true
+    else
+      false
+    end
+  end
+
+  def check_win
+    if @board.winner?
+      @board.print_board
+      puts 'We have a winner! Congratulations ' + @current_player.name
       true
     else
       false
@@ -86,7 +94,10 @@ class Game
   def set_up_players
     puts 'Enter your name!'
     @name = gets.strip
-    [Player.new(@name, @mark, @board), Computer.new('R2-D2', @computer_mark, @board)]
+    [
+      Player.new(@name, @mark, @board),
+      Computer.new('R2-D2', @computer_mark, @board)
+    ]
     # TODO: Add input validation
   end
 
