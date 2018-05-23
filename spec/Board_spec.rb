@@ -137,11 +137,11 @@ RSpec.describe Board, 'check line values' do
   context 'validating if line of @size has matching values ' do
     it 'returns true when all values are equal' do
       allow(@board).to receive(:get_value).and_return(nil, nil, nil)
-      expect(@board.values_are_equal?(true)).to be_truthy
+      expect(@board.values_are_equal?(1)).to be_truthy
     end
     it 'returns nil when at least 1 value is different' do
       allow(@board).to receive(:get_value).and_return('X', 'O', 'X')
-      expect(@board.values_are_equal?(false, true)).to be_falsey
+      expect(@board.values_are_equal?(2)).to be_falsey
     end
   end
 end

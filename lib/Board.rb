@@ -70,25 +70,36 @@ class Board
       check_diagonal || check_diagonal_inverted
   end
 
-  def values_are_equal?(is_row = false, is_column = false, is_diag = false)
+  def values_are_equal?(option = 4)
     @size.times do |index|
-      break if get_value(
-        is_column ? @row : index, is_row ? @column : is_diag ? index : @size - 1 - index
-      ) != @mark
+      row, col = get_coordinate_values(option, index)
+      break if get_value(row, col) != @mark
       return true if index == @size - 1
     end
   end
 
+  def get_coordinate_values(option, index)
+    if option === 1
+      [index, @column]
+    elsif option === 2
+      [@row, index]
+    elsif option === 3
+      [index, index]
+    else
+      [index, @size - 1 - index]
+    end
+  end
+
   def check_vertical
-    values_are_equal?(true, false)
+    values_are_equal?(1)
   end
 
   def check_horizontal
-    values_are_equal?(false, true)
+    values_are_equal?(2)
   end
 
   def check_diagonal
-    return values_are_equal?(false, false, true) if @row == @column
+    return values_are_equal?(3) if @row == @column
   end
 
   def check_diagonal_inverted
