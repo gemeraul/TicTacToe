@@ -6,23 +6,20 @@ class Player
     @name = name
     @mark = mark
     @board = board
+    @invalid_input_error =
+      "\nThis is an invalid input! Only use numbers separated by a comma.\n"
   end
 
   def select_box
     loop do
       row, column = ask_for_coordinates
-      next unless input_valid?(row, column)
+      next puts @invalid_input_error unless input_valid?(row, column)
       break if @board.add_mark(row - 1, column - 1, @mark)
     end
   end
 
   def input_valid?(row, column)
-    if row.is_a?(Integer) && column.is_a?(Integer)
-      true
-    else
-      puts "\nThis is an invalid input! Only use numbers separated by a comma\n"
-      false
-    end
+    row.is_a?(Integer) && column.is_a?(Integer)
   end
 
   def ask_for_coordinates
