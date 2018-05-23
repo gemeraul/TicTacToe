@@ -62,26 +62,18 @@ class Game
   end
 
   def check_game_over
-    check_win || check_tie
-  end
-
-  def check_tie
-    if @turn >= @size**2
-      puts 'Aww game is over, we have a draw!'
-      true
-    else
-      false
-    end
-  end
-
-  def check_win
     if @board.winner?
       @board.print_board
       puts 'We have a winner! Congratulations ' + @current_player.name
       true
-    else
-      false
+    elsif check_tie
+      puts 'Aww game is over, we have a draw!'
+      true
     end
+  end
+
+  def check_tie
+    return true if @turn >= @size**2
   end
 
   def create_board

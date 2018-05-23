@@ -46,25 +46,23 @@ class Board
   end
 
   def location_is_valid?(row, column)
-    space_is_free(row, column) unless out_of_bounds(row, column)
+    if out_of_bounds(row, column)
+      puts "\nThe values selected are out of bounds! Lets try again...\n"
+      false
+    elsif !space_is_free(row, column)
+      puts "\nThis space has already been marked! Lets try again...\n"
+      false
+    else
+      true
+    end
   end
 
   def out_of_bounds(row, column)
-    if row <= @size && column <= @size
-      false
-    else
-      puts "\nThe values selected are out of bounds! Lets try again...\n"
-      true
-    end
+    return true if row >= @size || column >= @size
   end
 
   def space_is_free(row, column)
-    if get_value(row, column).nil?
-      true
-    else
-      puts "\nThis space has already been marked! Lets try again...\n"
-      false
-    end
+    return true if get_value(row, column).nil?
   end
 
   def winner?

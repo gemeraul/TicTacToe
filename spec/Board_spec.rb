@@ -106,7 +106,7 @@ RSpec.describe Board, 'out of bounds' do
       expect(@board.out_of_bounds(2, 4)).to be_truthy
     end
     it 'returns false when row and column are equal to board size' do
-      expect(@board.out_of_bounds(3, 3)).to be_falsey
+      expect(@board.out_of_bounds(3, 3)).to be_truthy
     end
     it 'returns false when row and column are less than board size' do
       expect(@board.out_of_bounds(1, 1)).to be_falsey
@@ -125,7 +125,7 @@ RSpec.describe Board, 'space is free' do
     end
     it 'returns false when value in space is not nil' do
       allow(@board).to receive(:get_value).and_return('X')
-      expect(@board.space_is_free(2, 1)).to be false
+      expect(@board.space_is_free(2, 1)).to be_falsey
     end
   end
 end
