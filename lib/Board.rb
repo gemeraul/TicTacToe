@@ -79,11 +79,11 @@ class Board
   end
 
   def get_coordinate_values(option, index)
-    if option === 1
+    if option == 1
       [index, @column]
-    elsif option === 2
+    elsif option == 2
       [@row, index]
-    elsif option === 3
+    elsif option == 3
       [index, index]
     else
       [index, @size - 1 - index]
